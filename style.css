@@ -1,0 +1,136 @@
+
+body{
+  font-family: 'Poppins', sans-serif;
+  color: #d2d3d8;
+  background-color:#21232d;
+}
+
+/*Container*/
+.containerPerso{
+  min-height:20px;
+  background-color:#21232d;
+  border:1px solid #2b2d36;
+  box-shadow:inset 0 1px 1px #393a43;
+  display: flex;
+}
+/*
+.containerPerso > div
+{
+  border: 1px solid red;
+}*/
+/*Animations container*/
+.containerPerso:hover{
+  background-color:#303650;
+  transition: 1s ease;
+  box-shadow:inset 0 0  10px 3px #21232d;
+  cursor: pointer;
+}
+.containerPerso:hover>.sensorName {
+  font-size: 20px;
+  transition: 0.5s ease;
+}
+
+/*Remove padding from bootstrap*/
+.no-padding {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+}
+
+/*Clock and Date*/
+#div_horloge
+{
+    text-align: center;
+    font-size: 60px;
+}
+#div_date
+{
+    text-align: center;
+    font-size: 30px;
+}
+.dateHeureContainer{
+  padding-top:100px;
+  min-height:350px;
+  display:block;
+}
+/*Container temperature + humiditeAir*/
+.temperature, .humiditeAir{
+  font-size:50px;
+  height: 175px;
+}
+
+
+/*Temperature properties*/
+.now{
+  color: #e95124;
+}
+.min, .max{
+  font-style: italic;
+  font-size:30px;
+}
+.min>.text, .max>.text{
+  font-size: 20px;
+  width: auto;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 2px;
+}
+.min>.value, .max>.value{
+  display: inline-block;
+  vertical-align: middle;
+  font-style: normal;
+  color: #e95124;
+}
+.properties
+{
+  flex: 1; /*grow*/
+}
+.lineChartTemp{
+   flex: 2; /*grow*/
+}
+
+/*Humidity properties*/
+.humiditeSol{
+  min-height:175px;
+  font-size:60px;
+  text-align: center;
+  display: block;
+  transition: 0.5s ease;
+}
+.progressHumidity{
+  flex: 2; /*grow*/
+}
+/*Gauge Humdimity change*/
+.liquidFillGaugeText{
+  font-family: Helvetica;
+  font-weight: bold;
+}
+.svg{
+  margin: auto;
+  margin-top: 5px;
+  height:130px;
+  width:130px;
+}
+.sensorName {
+  font-size: 18px;
+}
+
+
+/*Line Chart*/
+
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 2px;
+}
+
+.axisRed line{
+  stroke: #d2d3d8;
+}
+
+.axisRed path{
+  stroke: #d2d3d8;
+}
+
+.axisRed text{
+  fill: #d2d3d8;
+}
