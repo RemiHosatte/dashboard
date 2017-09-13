@@ -134,3 +134,36 @@ body{
 .axisRed text{
   fill: #d2d3d8;
 }
+
+
+/*Trello task*/
+.title {
+  font-size: 30px;
+  display: block;
+  text-align: center;
+  font-family: 'Indie Flower';
+}
+.noHover{
+    pointer-events: none;
+}
+.task {
+  line-height: 40px;
+  font-size: 25px;
+  font-family: 'Indie Flower';
+  margin: 0;
+}
+.nameTask{
+  text-align: left;
+  white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      display: block;
+}
+.checkText {
+  text-decoration: line-through;
+  color:#424242;
+  font-style:italic;
+}
+.state {
+  display: block;
+}

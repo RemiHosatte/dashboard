@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -26,10 +27,15 @@
  </script>
   <script src="scripthorloge.js"></script>
 
+<style>
+.noPaddingLeft {
+  padding-right: 0;
+}
 
+</style>
 </head>
 <body>
-
+    <div class="container-fluid">
       <div class="row">
         <div class="col-sm-4 no-padding">
           <div class="containerPerso dateHeureContainer">
@@ -37,122 +43,150 @@
               <div id="div_date"></div>
           </div>
         </div>
-        <div class="col-sm-3 no-padding tempHumicontainer">
-          <div class="containerPerso temperature">
-                  <div class="properties">
-                    <div class="now">
-                      00°C
-                    </div>
-                    <div class="min">
-                      <div class="text">
-                        Min:
-                      </div>
-                      <div class="value">
-                       00°C
-                      </div>
-                    </div>
-                    <div class="max">
-                      <div class="text">
-                        Max:
-                      </div>
-                      <div class="value">
-                       00°C
-                      </div>
-                    </div>
-                  </div>
-                  <div class="lineChartTemp">
-                    <svg id="chartTemp"width="300" height="150"></svg>
-                  </div>
-          </div>
-          <div class="containerPerso temperature">
-              <div id="chart" class="chart-container">
+        <div class="col-sm-3 tempHumicontainer">
+          <div class="row">
+            <div class="col-sm-12 containerPerso temperature no-padding">
 
-              </div>
               <div class="properties">
-                <div class="now">
-                  00°C
-                </div>
+                <div class="now">00°C</div>
                 <div class="min">
-                  <div class="text">
-                    Min:
-                  </div>
-                  <div class="value">
-                   00°C
-                  </div>
+                  <div class="text">Min:</div>
+                  <div class="value">00°C</div>
                 </div>
                 <div class="max">
-                  <div class="text">
-                    Max:
-                  </div>
-                  <div class="value">
-                   00°C
-                  </div>
+                  <div class="text">Max:</div>
+                  <div class="value">00°C</div>
+                </div>
+              </div>
+
+              <div class="lineChartTemp">
+                <svg id="chartTemp"width="300" height="150"></svg>
+              </div>
+
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 containerPerso humiditeAir">
+
+              <div id="chart" class="chart-container"></div>
+
+              <div class="properties">
+                <div class="min">
+                  <div class="text">Min:</div>
+                    <div class="value">00%</div>
+                </div>
+                <div class="max">
+                  <div class="text">Max:</div>
+                  <div class="value">00%</div>
                 </div>
               </div>
 
             </div>
-            </div>
-            <div class="col-sm-5 no-padding">
-              <div class="col-sm-4 no-padding containerPerso humiditeSol">
-                <div class="sensorName">
-                  SensorName
-                </div>
-                <div class="svg">
-                  <svg id="fillgauge0" width="100%" height="100%"></svg>
-                </div>
-              </div>
-              <div class="col-sm-4 no-padding containerPerso humiditeSol">
-                <div class="sensorName">
-                  SensorName
-                </div>
-                <div class="svg">
-                  <svg id="fillgauge1" width="100%" height="100%"></svg>
-                </div>
-              </div>
-              <div class="col-sm-4 no-padding containerPerso humiditeSol">
-                <div class="sensorName">
-                  SensorName
-                </div>
-                <div class="svg">
-                  <svg id="fillgauge2" width="100%" height="100%"></svg>
-                </div>
-              </div>
+          </div>
+        </div>
+        <div class="col-sm-5">
+          <div class="row">
 
-              <div class="col-sm-4 no-padding containerPerso humiditeSol">
-                <div class="sensorName">
-                  SensorName
-                </div>
-                <div class="svg">
-                  <svg id="fillgauge3" width="100%" height="100%"></svg>
-                </div>
+            <div class="col-sm-4 containerPerso humiditeSol">
+              <div class="sensorName">
+                SensorName
               </div>
-              <div class="col-sm-4 no-padding containerPerso humiditeSol">
-                <div class="sensorName">
-                  SensorName
-                </div>
-                <div class="svg">
-                  <svg id="fillgauge4" width="100%" height="100%"></svg>
-                </div>
+              <div class="svg">
+                <svg id="fillgauge0" width="100%" height="100%"></svg>
               </div>
-              <div class="col-sm-4 no-padding containerPerso humiditeSol">
-                <div class="sensorName">
-                  SensorName
-                </div>
-                <div class="svg">
-                  <svg id="fillgauge5" width="100%" height="100%"></svg>
-                </div>
+            </div>
+
+            <div class="col-sm-4 containerPerso humiditeSol">
+              <div class="sensorName">
+                SensorName
               </div>
+              <div class="svg">
+                <svg id="fillgauge1" width="100%" height="100%"></svg>
+              </div>
+            </div>
+
+            <div class="col-sm-4 containerPerso humiditeSol">
+              <div class="sensorName">
+                SensorName
+              </div>
+              <div class="svg">
+                <svg id="fillgauge2" width="100%" height="100%"></svg>
+              </div>
+            </div>
+
+            <div class="col-sm-4 containerPerso humiditeSol">
+              <div class="sensorName">
+                SensorName
+              </div>
+              <div class="svg">
+                <svg id="fillgauge3" width="100%" height="100%"></svg>
+              </div>
+            </div>
+
+            <div class="col-sm-4 containerPerso humiditeSol">
+              <div class="sensorName">
+                SensorName
+              </div>
+              <div class="svg">
+                <svg id="fillgauge4" width="100%" height="100%"></svg>
+              </div>
+            </div>
+
+            <div class="col-sm-4 containerPerso humiditeSol">
+              <div class="sensorName">
+                SensorName
+              </div>
+              <div class="svg">
+                <svg id="fillgauge5" width="100%" height="100%"></svg>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-4">
+        <div class="col-sm-3">
           <div class="row">
-            <div class="col-sm-12 title containerPerso">A FAIRE</div>
+            <div class="col-sm-12 title containerPerso noHover">A FAIRE</div>
           </div>
+          <div class="row">
+            <div class="col-sm-10 inputNewTask containerPerso">
+              <input type="text" name="newTask" placeholder="Ajouter une nouvelle tache"/>
+            </div>
+            <div class="containerPerso col-sm-2  plusBtn">
+              <img class="addImg" src="plus.png" width="100%">
+            </div>
+          </div>
+          <div class="row">
             <div class="tasksList"></div>
+          </div>
         </div>
       </div>
+    </div>
+<style>
 
+input[name=newTask] {
+width: 100%;
+background-color:#21232d;
+border: 0;
+padding-left: 10px;
+}
+.inputNewTask {
+  line-height: 40px;
+  padding: 0;
+  box-shadow:inset 0 0  1px 2px #21232d;
+}
+
+input[name=newTask]:focus {
+  background-color:#303650;
+  transition: 1s ease;
+  box-shadow:inset 0 0  10px 3px #21232d;
+  outline: none;
+}
+.plusBtn {
+  min-height: 44px;
+  display: block;
+}
+</style>
 <script>
 
 function updateState(elm) {
@@ -186,7 +220,7 @@ var displayCards = function(cards)
     $('.tasksList')
     .append('<div class="row task" onclick="updateState(this)">' +
     '<div class="col-sm-2 containerPerso state"  >' +
-    '<img  id="' + value.id + '" class="stateImg" src="uncheck.png" width="80%"/></div>' +
+    '<img  id="' + value.id + '" class="stateImg" src="uncheck.png" height="30px"/></div>' +
     '<div class="col-sm-10 nameTask containerPerso">' + value.name +'</div>' +
     '</div>');
     console.log(value.name);
@@ -270,33 +304,7 @@ window.Trello.authorize({
 
 
 </script>
-<style>
-.border{
-  border:1px solid red;
-}
-.trelloContainer {
-  min-height: 500px;
-}
-.listTitle{
-
-  font-weight: bold;
-  text-align: center;
-  vertical-align: middle;
-  border-bottom:3px solid #646c92;
-}
-.task{
-  font-size: 30px;
-  font-weight: bold;
-  text-align: center;
-  vertical-align: middle;
-  width: 100%;
-  height: 50px;
-  border-bottom:3px solid #646c92;
-}
-</style>
-
-
-      <script type="text/javascript">
+  <script type="text/javascript">
 
           var percent = 55;
 
@@ -394,34 +402,20 @@ window.Trello.authorize({
                       'font-size':'45px'
 
                   });
-
-
           var arcTweenOld=function(transition, percent,oldValue) {
               transition.attrTween("d", function (d) {
 
                   var newAngle=(percent/100)*(2*Math.PI);
-
                   var interpolate = d3version3.interpolate(d.endAngle, newAngle);
-
                   var interpolateCount = d3version3.interpolate(oldValue, percent);
-
-
                   return function (t) {
+
                       d.endAngle = interpolate(t);
                       var pathForegroundCircle = arcLine(d);
-
                       middleTextCount.text(Math.floor(interpolateCount(t))+'%');
-
                       var pathDummyCircle = arcDummy(d);
-
-                      console.log(pathDummyCircle);
-
                       var coordinate = pathDummyCircle.split("L")[1].split("A")[0];
-
-                      console.log(coordinate);
-
                       endCircle.attr('transform', 'translate(' + coordinate+ ')');
-
                       return pathForegroundCircle;
                   };
               });
@@ -439,10 +433,8 @@ window.Trello.authorize({
               percent=(Math.random() * 60) + 20;
               setTimeout(animate,3000);
           };
-
           setTimeout(animate,0);
-
-      </script>
+</script>
 
 
 </body>
