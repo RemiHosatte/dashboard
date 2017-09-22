@@ -27,17 +27,17 @@ d3.tsv("data.tsv", function(d) {
   x.domain(d3.extent(data, function(d) { return d.date; }));
   y.domain(d3.extent(data, function(d) { return d.close; }));
 
-  g.append("g")
+  /*g.append("g")
       .attr("transform", "translate(0," + height + ")")
       .attr("class", "axisRed")
       .call(d3.axisBottom(x))
     .select(".domain")
-      .remove();
+      .remove();*/
 
   g.append("g")
       .attr("class", "axisRed")
       .call(d3.axisLeft(y)
-          .ticks(5));
+          .ticks(2));
 
   g.append("path")
       .datum(data)
@@ -45,6 +45,6 @@ d3.tsv("data.tsv", function(d) {
       .attr("stroke", "#e95124")
       .attr("stroke-linejoin", "round")
       .attr("stroke-linecap", "round")
-      .attr("stroke-width", 1.5)
+      .attr("stroke-width", 2)
       .attr("d", line);
 });

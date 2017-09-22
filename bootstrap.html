@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script src="https://api.trello.com/1/client.js?key=a326d5b9e9de639e0cb9ea5c34a84c54"></script>
+    <style>
+    body {
+      color:white;
+      font-size: 18px;
+  padding-top: 10px;
+  background-color:blue;
+}
+
+.containerPerso{
+
+  border:0.5px solid #2b2d36;
+  box-shadow:inset 0 1px 1px #393a43;
+
+}
+.containerPerso:hover{
+  background-color:#303650;
+  transition: 1s ease;
+  box-shadow:inset 0 0  5px 3px #21232d;
+  cursor: pointer;
+}
+.title {
+  font-size: 30px;
+}
+[class*="col-"], footer {
+  background-color: #21232d;
+  /*border: 2px solid red;
+*/
+  line-height: 40px;
+  text-align: center;
+}
+.nameTask{
+  text-align: left;
+  white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+}
+.hideImg {
+  display: none;
+}
+.checkText {
+  text-decoration: line-through;
+  color:#424242;
+  font-style:italic;
+}
+</style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="row">
+            <div class="col-sm-12 title containerPerso">A FAIRE</div>
+          </div>
+          <div class="row">
+
+            <div class="col-sm-10 inputNewTask containerPerso">
+              <input type="text" name="newTask" placeholder="Ajouter une nouvelle tache"/>
+            </div>
+            <div class="col-sm-2">
+              <img class="addImg" src="plus.png" width="80%">
+            </div>
+          </div>
+            <div class="tasksList"></div>
+        </div>
+      </div>
+    </div>
+<style>
+input[name=newTask] {
+width: 100%;
+background-color:#21232d;
+border: 0;
+padding-left: 10px;
+}
+.inputNewTask {
+  padding: 0;
+  box-shadow:inset 0 0  1px 2px #21232d;
+}
+
+input[name=newTask]:focus {
+  background-color:#303650;
+  transition: 1s ease;
+  box-shadow:inset 0 0  10px 3px #21232d;
+  outline: none;
+}
+</style>
+<script>
+function updateState(elm) {
+  var imgLink = elm.getElementsByTagName('img')[0].getAttribute('src');
+
+  console.log(elm.getElementsByClassName("nameTask"));
+  if (imgLink == 'uncheck.png')
+  {
+    elm.getElementsByTagName('img')[0].src = 'check.png';
+    elm.getElementsByClassName("nameTask")[0].style.cssText +=
+    "text-decoration: line-through;" +
+    "color:#424242;" +
+    "font-style:italic;";
+  }
+  else {
+    elm.getElementsByTagName('img')[0].src = 'uncheck.png';
+    elm.getElementsByClassName("nameTask")[0].style.cssText +=
+    "text-decoration: none;" +
+    "color:white;" +
+    "font-style:normal;";
+  }
+}
+
+
+var displayCards = function(cards)
+{
+  $.each(cards, function(index, value) {
+    $('.tasksList')
+    .append('<div class="row task" onclick="updateState(this)">' +
+    '<div class="col-sm-2 containerPerso state"  >' +
+    '<img  id="' + value.id + '" class="stateImg" src="uncheck.png" width="80%"/></div>' +
+    '<div class="col-sm-10 nameTask containerPerso">' + value.name +'</div>' +
+    '</div>');
+    console.log(value.name);
+
+
+  });
+};
+
+
+var loadCards = function(list)
+{
+  console.log("Chargement des cartes..");
+  Trello.get(
+    'lists/'+ list +'/cards',
+    displayCards,
+    function() { console.log("Fail to load cards"); }
+  );
+};
+
+var displayList = function(lists) {
+  $.each(lists, function(index, value) {
+
+    if (value.name =="A FAIRE")
+    {
+      console.log("Liste " + value.name + " choisi");
+      console.log("ID: " + value.id);
+      loadCards(value.id);
+    }
+  });
+}
+
+
+var loadListFromBoard = function(id) {
+    console.log("Chargement du tableau ");
+    Trello.get(
+      '/boards/' + id + '/lists',
+      displayList,
+      function() { console.log("Fail to load lists"); }
+    );
+};
+
+var loadedBoards = function(boards) {
+  $.each(boards, function(index, value) {
+    if (value.name =="PERS")
+    {
+      console.log("Tableau " + value.name + " choisi");
+      console.log("ID: " + value.id);
+      loadListFromBoard(value.id);
+    }
+  });
+};
+
+
+
+var loadBoardFromUser = function() {
+
+  console.log('Successful authentication');
+  Trello.get(
+    '/members/me/boards',
+    loadedBoards,
+    function() { console.log("Failed to load boards"); }
+  );
+};
+
+var authenticationFailure = function() {
+  console.log('Failed authentication');
+};
+
+window.Trello.authorize({
+  type: 'popup',
+  name: 'Getting Started Application',
+  scope: {
+    read: 'true',
+    write: 'true' },
+  expiration: 'never',
+  success: loadBoardFromUser,
+  error: authenticationFailure
+});
+
+</script>
+
+
+  </body>
+</html>

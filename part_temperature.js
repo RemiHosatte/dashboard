@@ -1,0 +1,9 @@
+var resultSensor = getLastValueOfSensor(idSensorForTemperature);
+resultSensor[0] = parseFloat(resultSensor[1]).toFixed(1);
+resultSensor[1] = parseFloat(resultSensor[1]).toFixed(1);
+resultSensor[2] = parseFloat(resultSensor[2]).toFixed(1);
+resultSensor[3] = parseFloat(resultSensor[3]).toFixed(1);
+document.getElementById('temperature_now').innerHTML = resultSensor[0] + "C°";
+document.getElementById('temperature_min').innerHTML = resultSensor[1] + "C°";
+document.getElementById('temperature_max').innerHTML = resultSensor[2] + "C°";
+document.getElementById('temperature_avg').innerHTML = resultSensor[3] + "C°";

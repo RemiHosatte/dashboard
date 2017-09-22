@@ -21,8 +21,6 @@
 </script>
  <script src="http://d3js.org/d3.v4.min.js"></script>
  <script>
-
-   // test it worked
    console.log('v3', d3version3.version)
  </script>
   <script src="scripthorloge.js"></script>
@@ -38,48 +36,67 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-4 no-padding">
+
           <div class="containerPerso dateHeureContainer">
+            <div class="settings">
+                <img  src="setting.png" height="30px"/>
+            </div>
               <div id="div_horloge"></div>
               <div id="div_date"></div>
           </div>
         </div>
         <div class="col-sm-3 tempHumicontainer">
           <div class="row">
-            <div class="col-sm-12 containerPerso temperature no-padding">
-
+            <div class="col-sm-12 containerPerso temperature">
+              <div class="containerTitle">
+                Outdoor Temperature - 24H
+              </div>
+              <div class="now" id="temperature_now"></div>
               <div class="properties">
-                <div class="now">00°C</div>
+
+
                 <div class="min">
-                  <div class="text">Min:</div>
-                  <div class="value">00°C</div>
+                  <div class="text">Minimum:</div>
+                  <div class="value" id="temperature_min"></div>
                 </div>
                 <div class="max">
-                  <div class="text">Max:</div>
-                  <div class="value">00°C</div>
+                  <div class="text">Maximum:</div>
+                  <div class="value"id="temperature_max"></div>
+                </div>
+                <div class="avg">
+                  <div class="text">Average:</div>
+                  <div class="value"id="temperature_avg"></div>
                 </div>
               </div>
 
               <div class="lineChartTemp">
-                <svg id="chartTemp"width="300" height="150"></svg>
+                <svg id="chartTemp"width="250" height="130"></svg>
               </div>
 
             </div>
           </div>
           <div class="row">
             <div class="col-sm-12 containerPerso humiditeAir">
-
-              <div id="chart" class="chart-container"></div>
-
+              <div class="containerTitle">
+                Outdoor Air Humidity - 24H
+              </div>
               <div class="properties">
+
                 <div class="min">
-                  <div class="text">Min:</div>
-                    <div class="value">00%</div>
+                  <div class="text">Minimum:</div>
+                    <div id="humiditeAir_min" class="value"></div>
                 </div>
                 <div class="max">
-                  <div class="text">Max:</div>
-                  <div class="value">00%</div>
+                  <div class="text">Maximum:</div>
+                  <div id="humiditeAir_max" class="value"></div>
+                </div>
+                <div class="avg">
+                  <div class="text">Average:</div>
+                  <div id="humiditeAir_avg" class="value"></div>
                 </div>
               </div>
+
+              <div id="chart" class="chart-container"></div>
 
             </div>
           </div>
@@ -187,259 +204,18 @@ input[name=newTask]:focus {
   display: block;
 }
 </style>
-<script>
-
-function updateState(elm) {
-  var imgLink = elm.getElementsByTagName('img')[0].getAttribute('src');
-
-  console.log(elm.getElementsByClassName("nameTask"));
-  if (imgLink == 'uncheck.png')
-  {
-    elm.getElementsByTagName('img')[0].src = 'check.png';
-    elm.getElementsByClassName("nameTask")[0].style.cssText +=
-    "text-decoration: line-through;" +
-    "color:#424242;" +
-    "font-style:italic;";
-  }
-  else {
-    elm.getElementsByTagName('img')[0].src = 'uncheck.png';
-    elm.getElementsByClassName("nameTask")[0].style.cssText +=
-    "text-decoration: none;" +
-    "color:white;" +
-    "font-style:normal;";
-  }
-
-
-
-}
-
-
-var displayCards = function(cards)
-{
-  $.each(cards, function(index, value) {
-    $('.tasksList')
-    .append('<div class="row task" onclick="updateState(this)">' +
-    '<div class="col-sm-2 containerPerso state"  >' +
-    '<img  id="' + value.id + '" class="stateImg" src="uncheck.png" height="30px"/></div>' +
-    '<div class="col-sm-10 nameTask containerPerso">' + value.name +'</div>' +
-    '</div>');
-    console.log(value.name);
-
-
-  });
-};
-
-
-var loadCards = function(list)
-{
-  console.log("Chargement des cartes..");
-  Trello.get(
-    'lists/'+ list +'/cards',
-    displayCards,
-    function() { console.log("Fail to load cards"); }
-  );
-};
-
-var displayList = function(lists) {
-  $.each(lists, function(index, value) {
-
-    if (value.name =="A FAIRE")
-    {
-      console.log("Liste " + value.name + " choisi");
-      console.log("ID: " + value.id);
-      loadCards(value.id);
-    }
-  });
-}
-
-
-var loadListFromBoard = function(id) {
-    console.log("Chargement du tableau ");
-    Trello.get(
-      '/boards/' + id + '/lists',
-      displayList,
-      function() { console.log("Fail to load lists"); }
-    );
-};
-
-var loadedBoards = function(boards) {
-  $.each(boards, function(index, value) {
-    if (value.name =="PERS")
-    {
-      console.log("Tableau " + value.name + " choisi");
-      console.log("ID: " + value.id);
-      loadListFromBoard(value.id);
-    }
-  });
-};
-
-
-
-var loadBoardFromUser = function() {
-
-  console.log('Successful authentication');
-  Trello.get(
-    '/members/me/boards',
-    loadedBoards,
-    function() { console.log("Failed to load boards"); }
-  );
-};
-
-var authenticationFailure = function() {
-  console.log('Failed authentication');
-};
-
-window.Trello.authorize({
-  type: 'popup',
-  name: 'Getting Started Application',
-  scope: {
-    read: 'true',
-    write: 'true' },
-  expiration: 'never',
-  success: loadBoardFromUser,
-  error: authenticationFailure
-});
-
-
-
-
-</script>
-  <script type="text/javascript">
-
-          var percent = 55;
-
-          var w=175,h=175;
-
-          var outerRadius=(w/2)-10;
-          var innerRadius=outerRadius-8;
-
-
-          var color = ['#e95124','#2a3a46','#202b33'];
-
-          var arc=d3version3.svg.arc()
-                  .innerRadius(innerRadius)
-                  .outerRadius(outerRadius)
-                  .startAngle(0)
-                  .endAngle(2*Math.PI);
-
-          //The circle is following this
-          var arcDummy=d3version3.svg.arc()
-                  .innerRadius((outerRadius-innerRadius)/2+innerRadius)
-                  .outerRadius((outerRadius-innerRadius)/2+innerRadius)
-                  .startAngle(0);
-
-
-          var arcLine=d3version3.svg.arc()
-                  .innerRadius(innerRadius)
-                  .outerRadius(outerRadius)
-                  .startAngle(0);
-
-          var svg=d3version3.select("#chart")
-                  .append("svg")
-                  .attr({
-                      width:w,
-                      height:h,
-                      class:'shadow'
-                  }).append('g')
-                  .attr({
-                      transform:'translate('+w/2+','+h/2+')'
-                  });
-
-
-          //background
-          var path=svg.append('path')
-                  .attr({
-                      d:arc
-                  })
-                  .style({
-                      fill:color[1]
-                  });
-
-
-          var pathForeground=svg.append('path')
-                  .datum({endAngle:0})
-                  .attr({
-                      d:arcLine
-                  })
-                  .style({
-                      fill:color[0]
-                  });
-
-          //Dummy Arc for Circle
-          var pathDummy=svg.append('path')
-                  .datum({endAngle:0})
-                  .attr({
-                      d:arcDummy
-                  }).style({
-                      fill:color[0]
-                  });
-
-          var endCircle=svg.append('circle')
-                  .attr({
-                      r:8,
-                      transform:'translate(0,'+ (-outerRadius+15) +')'
-                  })
-                  .style({
-                      stroke:color[0],
-                      'stroke-width':5,
-                      fill:color[2]
-                  });
-
-          var middleTextCount=svg.append('text')
-                  .datum(0)
-                  .text(function(d){
-                      return d+'%';
-                  })
-
-                  .attr({
-                      class:'middleText',
-                      'text-anchor':'middle',
-                      dy:15,
-                      dx:0
-                  })
-                  .style({
-                      fill:'#e95124',
-                      'font-size':'45px'
-
-                  });
-          var arcTweenOld=function(transition, percent,oldValue) {
-              transition.attrTween("d", function (d) {
-
-                  var newAngle=(percent/100)*(2*Math.PI);
-                  var interpolate = d3version3.interpolate(d.endAngle, newAngle);
-                  var interpolateCount = d3version3.interpolate(oldValue, percent);
-                  return function (t) {
-
-                      d.endAngle = interpolate(t);
-                      var pathForegroundCircle = arcLine(d);
-                      middleTextCount.text(Math.floor(interpolateCount(t))+'%');
-                      var pathDummyCircle = arcDummy(d);
-                      var coordinate = pathDummyCircle.split("L")[1].split("A")[0];
-                      endCircle.attr('transform', 'translate(' + coordinate+ ')');
-                      return pathForegroundCircle;
-                  };
-              });
-          };
-
-          var oldValue=0;
-
-          var animate=function(){
-              pathForeground.transition()
-                      .duration(750)
-                      .ease('cubic')
-                      .call(arcTweenOld,percent,oldValue);
-
-              oldValue=percent;
-              percent=(Math.random() * 60) + 20;
-              setTimeout(animate,3000);
-          };
-          setTimeout(animate,0);
-</script>
-
 
 </body>
-
+<script src="rest_api.js" type="text/javascript"></script>
+<script>
+var idSensorForHumidity = 2;
+var idSensorForTemperature = 1;
+</script>
+<script src="part_temperature.js" type="text/javascript"></script>
+<script src="part_trello.js" type="text/javascript"></script>
+<script src="part_airhumidity.js" type="text/javascript"></script>
 <script src="liquidFillGauge.js" type="text/javascript"></script>
 <script src="liquidGaugeCustom.js" type="text/javascript"></script>
 <script src="scriptLineChartTemp.js" type="text/javascript"></script>
+
 </html>
